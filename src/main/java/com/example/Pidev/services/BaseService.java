@@ -11,25 +11,21 @@ import jakarta.transaction.Transactional;
 @Transactional
 public abstract class BaseService<T,ID> {
     @Autowired
-    protected BaseRepository<T, ID> jpaRepo;
+    BaseRepository<T, ID> jpaRepo;
 
     public List<T> retrieveAll() {
-        return jpaRepo.findAll();
+        return this.jpaRepo.findAll();
     }
 
     public Optional<T> retrieveById(ID id) {
-        return jpaRepo.findById(id);
+        return this.jpaRepo.findById(id);
     }
 
     public T add(T entity) {
-        return jpaRepo.save(entity);
-    }
-
-    public T update(T entity) {
-        return jpaRepo.save(entity);
+        return this.jpaRepo.save(entity);
     }
 
     public void delete(ID id) {
-        jpaRepo.deleteById(id);
+        this.jpaRepo.deleteById(id);
     }
 }

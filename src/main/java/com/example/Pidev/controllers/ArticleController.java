@@ -18,6 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.Pidev.models.Article;
 import com.example.Pidev.services.ArticleService;
 import com.example.Pidev.services.ExcelService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -30,6 +34,10 @@ public class ArticleController extends BaseController<Article,Long>{
         this.articleService = articleService;
         this.excelService=excelService;
     }
+    @PutMapping("/{id}")
+    public Article update(@PathVariable Long id, @RequestBody Article article) {
+        return  articleService.updateArticle(id,article);
+        }
     @GetMapping("/search")
     public List<Article> searchArticles(
             @RequestParam(required = false) String name,
@@ -39,10 +47,9 @@ public class ArticleController extends BaseController<Article,Long>{
         return articleService.searchArticles(name, minPrice, maxPrice, type);
     }
     @GetMapping("/best-selling")
-    public List<Article> getBestSellingArticles(@RequestParam(defaultValue = "5") int limit) {
+    public List<Article> getBestSellingArticles(@RequestParam(defaultValue = "3") int limit) {
         return articleService.getBestSellingArticles(limit);
     }
-    //--------------Partie Excel-------------------------------
     @GetMapping("/export")
     public ResponseEntity<Resource> exportArticles() {
         ByteArrayInputStream in = excelService.exportArticlesToExcel(articleService.retrieveAll());

@@ -1,7 +1,9 @@
 package com.example.Pidev.services;
 
-import com.example.Pidev.models.Order;
+import org.springframework.stereotype.Service;
 
+import com.example.Pidev.models.Order;
+@Service
 public class OrderService extends BaseService<Order,Long> {
     
 }

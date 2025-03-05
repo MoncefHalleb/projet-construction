@@ -35,10 +35,6 @@ public abstract class BaseController<T, ID> {
         return baseService.add(entity);
     }
 
-    @PutMapping
-    public T update(@RequestBody T entity) {
-        return baseService.update(entity);
-    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable ID id) {

@@ -1,5 +1,6 @@
 package com.example.tasksschservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,16 +15,16 @@ public class task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String description;
-
     @Enumerated(EnumType.STRING)
     private Priority priority;
-
+    private LocalDate startDate;
     private LocalDate dueDate;
-
     @Enumerated(EnumType.STRING)
     private Status status;
+
+
+    @OneToOne
+    private Image image;
 }

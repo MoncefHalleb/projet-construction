@@ -1,0 +1,41 @@
+<h1 class="centre">Liste des Réclamations</h1>
+<form [formGroup]="reclamationListForm" class="centre">
+
+  <div class="entries-section-container">
+    <div class="search-container">
+      <input type="text" formControlName="searchTerm" placeholder="Rechercher par titre..." />
+      <button type="button" (click)="searchReclamations()">Rechercher</button>
+    </div>
+    <table class="table-auto">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Type de Réclamation</th>
+        <th>Description</th>
+        <th>Date de Réclamation</th>
+        <th>Statut</th>
+        <th>Réponse</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reclamation of displayedReclamations">
+        <td>{{ reclamation.id_Reclamation }}</td>
+        <td>{{ reclamation.title }}</td>
+        <td>{{ reclamation.typeReclamation }}</td>
+        <td>{{ reclamation.description_Reclamation }}</td>
+        <td>{{ reclamation.date_Reclamation }}</td>
+        <td>{{ reclamation.statutReclamation }}</td>
+        <td>
+          <button (click)="goToReponse(reclamation.id_Reclamation)" class="Button_Reply">Répondre</button>
+        </td>
+        <td>
+          <button (click)="deleteReclamation(reclamation.id_Reclamation)" class="Button_Delete"><i class="fas fa-trash"></i></button>
+          <button (click)="goToEditReclamation(reclamation.id_Reclamation)" class="Button_Edit">Modifier</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

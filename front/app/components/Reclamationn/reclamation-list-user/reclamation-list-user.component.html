@@ -1,0 +1,31 @@
+<h1 class="centre">Liste des Réclamations</h1>
+<form [formGroup]="reclamationListForm">
+  <div  class="entries-section-container">
+    <table class="table-auto" >
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Type de Réclamation</th>
+        <th>Description</th>
+        <th>Date de Réclamation</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reclamation of reclamations">
+        <td>{{ reclamation.id_Reclamation }}</td>
+        <td>{{ reclamation.title }}</td>
+        <td>{{ reclamation.typeReclamation }}</td>
+        <td>{{ reclamation.description_Reclamation }}</td>
+        <td>{{ reclamation.date_Reclamation }}</td>
+        <td>
+          <button (click)="deleteReclamation(reclamation.id_Reclamation)" class="Button_Delete"><i class="fas fa-trash"></i></button>
+          <button (click)="goToEditReclamation(reclamation.id_Reclamation)" class="Button_Edit">Modifier</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</form>

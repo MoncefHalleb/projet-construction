@@ -1,0 +1,84 @@
+/* General Styling */
+body {
+    background-color: #f4f7f6; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Centering Login Box */
+.kc-form-wrapper {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields */
+.kc-form input[type="text"],
+.kc-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.kc-form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.kc-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Links */
+.kc-form a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.kc-form a:hover {
+    text-decoration: underline;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-error {
+    background-color: #ffdddd;
+    color: #d8000c;
+}
+
+.alert-success {
+    background-color: #ddffdd;
+    color: #4caf50;
+}
+
+/* Remember Me Checkbox */
+.kc-form label {
+    display: flex;
+    align-items: center;
+}
+
+.kc-form input[type="checkbox"] {
+    margin-right: 5px;
+}

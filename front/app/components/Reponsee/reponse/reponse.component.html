@@ -1,0 +1,11 @@
+<h1 class="centre">Répondre</h1>
+<div [formGroup]="reponseForm" class="entries-section-container">
+  <div class="form-field form-field-block">
+    <label class="text" for="ReponseField"> Reponse:</label>
+    <textarea type="text" id="ReponseField" formControlName="message_reponse" class="pika-single"></textarea>
+  </div>
+  <div class="form-actions">
+    <button type="button" (click)="onDelete()" class="Button_Delete">Annuler</button>
+    <button type="submit" (click)="onSubmit()" class="Button_Reply">Confirmer</button>
+  </div>
+</div>

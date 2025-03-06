@@ -1,0 +1,29 @@
+<div class="entries-section-container">
+<h1 class="centre">Vous avez un problème ? </h1>
+</div>
+<div [formGroup]="reclamationForm" class="entries-section-container">
+  <div class="form-field form-field-block">
+    <label class="text" for="titleField"> Title:</label>
+    <input type="text" id="titleField" formControlName="title" >
+  </div>
+  <div class="form-field form-field-block">
+    <label class="text">Type de Réclamation</label>
+    <mat-form-field>
+      <mat-label>Type de Réclamation</mat-label>
+      <select matNativeControl required formControlName="typeReclamation">
+        <option value="ANNULATION">Annulation</option>
+        <option value="MODIFICATION">Modification</option>
+        <option value="AUTRES">Autres</option>
+      </select>
+    </mat-form-field>
+  </div>
+  <div class="form-field form-field-block">
+    <label class="text" for="descriptionTextArea">Description:</label>
+    <textarea type="text" id="descriptionTextArea" formControlName="description_Reclamation" ></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" (click)="onDelete()" class="Button_Delete">Annuler</button>
+    <button type="submit" (click)="onSubmit()" class="Button_Reply">Confirmer</button>
+  </div>
+</div>

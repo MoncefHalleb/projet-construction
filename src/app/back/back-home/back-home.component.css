@@ -1,0 +1,104 @@
+/* General Styles */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .welcome-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .section-title {
+    text-align: center;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Styles */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .custom-table thead {
+    background: #2c3e50;
+    color: white;
+  }
+  
+  .custom-table tbody tr {
+    transition: 0.3s;
+  }
+  
+  .custom-table tbody tr:hover {
+    background: #f1c40f;
+    color: #2c3e50;
+    font-weight: bold;
+  }
+  
+  /* Role Badge Styling */
+  .badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: white;
+  }
+  
+  .badge-admin {
+    background: #e74c3c;
+  }
+  
+  .badge-user {
+    background: #3498db;
+  }
+  
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-sm {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+  }
+  
+  .btn-sm i {
+    font-size: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .custom-table {
+      font-size: 0.9rem;
+    }
+  
+    .btn-sm {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+  }
+  

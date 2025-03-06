@@ -1,0 +1,7 @@
+.file-input {
+  display: none;
+}
+.toast {
+  width: 300px !important;
+  white-space: nowrap !important;
+}

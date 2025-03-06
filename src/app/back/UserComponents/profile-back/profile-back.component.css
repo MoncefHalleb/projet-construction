@@ -1,0 +1,75 @@
+/* Profile Container */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background: #f4f4f4;
+}
+
+/* Profile Card */
+.profile-card {
+  background: rgb(210, 189, 189);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile Image */
+.profile-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.profile-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f1c40f;
+}
+
+/* Text Styling */
+h2 {
+  color: #333;
+}
+
+.highlight {
+  color: #81868b;
+  font-weight: bold;
+}
+
+/* Role Badge */
+.role-section {
+  margin: 10px 0;
+}
+
+.role-badge {
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.admin-role {
+  background: #e74c3c;
+}
+
+.user-role {
+  background: #3498db;
+}
+
+/* Greeting Text */
+.greeting {
+  font-style: italic;
+  color: #666;
+  margin-top: 10px;
+}

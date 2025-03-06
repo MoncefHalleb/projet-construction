@@ -1,0 +1,17 @@
+<h1 class="centre">Modifier votre réponse</h1>
+<div class="entries-section-container">
+  <div *ngIf="isLoading">
+    Chargement en cours ...
+  </div>
+  <div class="form-field form-field-block">
+    <div *ngIf="!isLoading">
+      <div class="form-field form-field-block">
+        <label for="messageField" class="text">Description :</label>
+        <input type="text" id="messageField" [(ngModel)]="reponse.message_reponse" class="form-control">
+      </div>
+      <div class="form-actions">
+        <button (click)="updateReponse()" class="Button_Edit">Mettre à jour</button>
+      </div>
+    </div>
+  </div>
+</div>

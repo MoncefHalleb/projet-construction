@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="mt-4">
+    <h2 class="welcome-text">{{ welcome }}</h2>
+  </div>
+
+  <h2 class="mb-4 section-title">List of Users</h2>
+
+  <div class="table-responsive">
+    <table class="table table-hover custom-table">
+      <thead class="table-dark">
+        <tr>
+          <th>Login</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList">
+          <td>{{ user.login }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>
+            <span class="badge" [ngClass]="{'badge-admin': user.role === 'admin', 'badge-user': user.role !== 'admin'}">
+              {{ user.role }}
+            </span>
+          </td>
+          <td>{{ user.num_tel }}</td>
+          <td>
+            <div class="action-buttons">
+              <button type="button" class="btn btn-primary btn-sm" (click)="updateUser(user)">
+                <i class="fas fa-edit"></i> Update
+              </button>
+
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(user)">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

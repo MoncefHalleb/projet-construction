@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+
+  back:
+<<<<<<< HEAD
+    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back
+=======
+    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back\Back
+>>>>>>> 6ad704e (✅ Your commit message)
+    image: moncefhalleb/back:1.0
+    container_name: back
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/mydb?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/constructionRealm
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/constructionRealm/protocol/openid-connect/certs
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+      keycloak:
+        condition: service_started
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6ad704e (✅ Your commit message)
+  db_mysql:
+    image: mysql:8
+    container_name: db_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=mydb
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 20s
+
+  eureka-server:
+    build: C:\Users\MSI\Downloads\eureka-server\eureka-server
+    image: moncefhalleb/eureka-server:1.0
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - EUREKA_SERVER_ENABLE_SELF_PRESERVATION=false
+
+  keycloak:
+<<<<<<< HEAD
+    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6\keycloak-23.0.64\keycloak-23.0.6
+=======
+    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6
+>>>>>>> 6ad704e (✅ Your commit message)
+    image: moncefhalleb/keycloak:1.0
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=moncefhallab15@gmail.com
+      - KEYCLOAK_ADMIN_PASSWORD=admin47
+<<<<<<< HEAD
+=======
+      - KEYCLOAK_HOSTNAME=keycloak
+
+>>>>>>> 6ad704e (✅ Your commit message)

@@ -3,11 +3,7 @@ version: '3.8'
 services:
 
   back:
-<<<<<<< HEAD
     build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back
-=======
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back\Back
->>>>>>> 6ad704e (✅ Your commit message)
     image: moncefhalleb/back:1.0
     container_name: back
     ports:
@@ -27,10 +23,6 @@ services:
       keycloak:
         condition: service_started
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ad704e (✅ Your commit message)
   db_mysql:
     image: mysql:8
     container_name: db_mysql
@@ -58,11 +50,7 @@ services:
       - EUREKA_SERVER_ENABLE_SELF_PRESERVATION=false
 
   keycloak:
-<<<<<<< HEAD
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6\keycloak-23.0.64\keycloak-23.0.6
-=======
     build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6
->>>>>>> 6ad704e (✅ Your commit message)
     image: moncefhalleb/keycloak:1.0
     container_name: keycloak
     ports:
@@ -70,8 +58,4 @@ services:
     environment:
       - KEYCLOAK_ADMIN=moncefhallab15@gmail.com
       - KEYCLOAK_ADMIN_PASSWORD=admin47
-<<<<<<< HEAD
-=======
       - KEYCLOAK_HOSTNAME=keycloak
-
->>>>>>> 6ad704e (✅ Your commit message)

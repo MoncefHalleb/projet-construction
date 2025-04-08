@@ -1,0 +1,8 @@
+# Ignore all .jar files
+*.jar
+
+# Ignore all .tgz files
+*.tgz
+
+# Ignore all .mmdb files
+*.mmdb

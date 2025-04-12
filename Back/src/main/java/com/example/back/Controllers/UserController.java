@@ -277,7 +277,6 @@ public class UserController {
 
         return ResponseEntity.ok(loginHistory);
     }
-    @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAnyAuthority('admin', 'user', 'chef_projet', 'architecte', 'ouvrier')")
     @PostMapping("/uploadProfilePictureAsBlobByEmail/{email}")
     public ResponseEntity<ApiResponse> uploadProfilePictureAsBlobByEmail(

@@ -2,35 +2,6 @@ version: '3.8'
 
 services:
 
-  back:
-<<<<<<< HEAD
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back
-=======
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\Back\Back
->>>>>>> 6ad704e (✅ Your commit message)
-    image: moncefhalleb/back:1.0
-    container_name: back
-    ports:
-      - "9090:9090"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/mydb?createDatabaseIfNotExist=true&useSSL=false
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/constructionRealm
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/constructionRealm/protocol/openid-connect/certs
-    depends_on:
-      db_mysql:
-        condition: service_healthy
-      eureka-server:
-        condition: service_started
-      keycloak:
-        condition: service_started
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ad704e (✅ Your commit message)
   db_mysql:
     image: mysql:8
     container_name: db_mysql
@@ -45,9 +16,11 @@ services:
       interval: 10s
       retries: 5
       start_period: 20s
+    networks:
+      - backend-network
 
   eureka-server:
-    build: C:\Users\MSI\Downloads\eureka-server\eureka-server
+    build: "C:/Users/MSI/Downloads/eureka-server/eureka-server"
     image: moncefhalleb/eureka-server:1.0
     container_name: eureka-server
     ports:
@@ -56,13 +29,16 @@ services:
       - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
       - EUREKA_CLIENT_FETCH_REGISTRY=false
       - EUREKA_SERVER_ENABLE_SELF_PRESERVATION=false
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - backend-network
 
   keycloak:
-<<<<<<< HEAD
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6\keycloak-23.0.64\keycloak-23.0.6
-=======
-    build: C:\Users\MSI\Downloads\wetransfer_back-zip_2025-03-13_0142\keycloak-23.0.6
->>>>>>> 6ad704e (✅ Your commit message)
+    build: "C:/Users/MSI/Downloads/wetransfer_back-zip_2025-03-13_0142/keycloak-23.0.6"
     image: moncefhalleb/keycloak:1.0
     container_name: keycloak
     ports:
@@ -70,8 +46,60 @@ services:
     environment:
       - KEYCLOAK_ADMIN=moncefhallab15@gmail.com
       - KEYCLOAK_ADMIN_PASSWORD=admin47
-<<<<<<< HEAD
-=======
       - KEYCLOAK_HOSTNAME=keycloak
+      - KC_FEATURES=preview
+      - GEMINI_API_KEY="AIzaSyBNBNeYT-Gpt8P3RSCWfdu97OQOFZmjfFg"
 
->>>>>>> 6ad704e (✅ Your commit message)
+    command: start-dev
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - backend-network
+
+  api-gateway:
+    build: "C:/Users/MSI/Downloads/apiGateway/ApiGateway"
+    image: moncefhalleb/api-gateway:1.0
+    container_name: api-gateway
+    ports:
+      - "8088:8088"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_CLOUD_GATEWAY_DISCOVERY_LOCATOR_ENABLED=true
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/constructionRealm
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/constructionRealm/protocol/openid-connect/certs
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - backend-network
+
+  back:
+    build: "C:/Users/MSI/Downloads/wetransfer_back-zip_2025-03-13_0142/Back/Back"
+    image: moncefhalleb/back:1.0
+    container_name: back
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/mydb?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/constructionRealm
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/realms/constructionRealm/protocol/openid-connect/certs
+      - GEMINI_API_KEY=AIzaSyBNBNeYT-Gpt8P3RSCWfdu97OQOFZmjfFg
+    depends_on:
+      db_mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+      api-gateway:
+        condition: service_started
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge

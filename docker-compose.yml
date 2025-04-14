@@ -13,6 +13,21 @@ services:
     networks:
       - microservices-network
 
+  # Service de configuration
+  config-service:
+    build:
+      context: ./config-service
+    ports:
+      - "9999:9999" # Port d'Eureka (par exemple)
+    expose:
+      - '9999'
+    depends_on:
+      - discovery-service
+    environment:
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+    networks:
+      - microservices-network
+
   # Service de gateway (Spring Cloud Gateway ou autre)
   gateway-service:
     build:

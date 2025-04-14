@@ -1,0 +1,49 @@
+services:
+  # Service de découverte (Eureka ou autre)
+  discovery-service:
+    build:
+      context: ./discovery-service
+    ports:
+      - "8761:8761" # Port d'Eureka (par exemple)
+    healthcheck:
+      test: [ "CMD" , "CURL" , "-f" , "http://localhost:8761/actuator/health" ]
+      interval: 10s
+      retries: 7
+      start_period: 30s
+    networks:
+      - microservices-network
+
+  # Service de gateway (Spring Cloud Gateway ou autre)
+  gateway-service:
+    build:
+      context: ./gateaway-service
+    ports:
+      - "8888:8888" # Port de la gateway
+    depends_on:
+      - discovery-service
+    environment:
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+    networks:
+      - microservices-network
+
+  # Service de tâches
+  task-service:
+    build:
+      context: ./Task-service
+    ports:
+      - "8085:8085" # Port du task-service
+    depends_on:
+      - discovery-service
+    environment:
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+    networks:
+      - microservices-network
+
+# Réseau pour connecter les services
+networks:
+  microservices-network:
+    driver: bridge
+
+# Volume pour persister les données de H2 (optionnel)
+volumes:
+  h2-data:

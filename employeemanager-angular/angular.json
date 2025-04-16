@@ -30,7 +30,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/owl.carousel.min.css",
+              "src/assets/css/slicknav.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/magnific-popup.css",
+              "src/assets/css/fontawesome-all.min.css",
+              "src/assets/css/themify-icons.css",
+              "src/assets/css/slick.css",
+              "src/assets/css/nice-select.css",
+              "src/assets/css/style.css"    
+
             ],
             "scripts": []
           },

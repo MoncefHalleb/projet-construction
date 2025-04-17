@@ -1,6 +1,8 @@
 package com.example.tasksschservice.controller;
 
 import com.example.tasksschservice.entities.Image;
+import com.example.tasksschservice.entities.Priority;
+import com.example.tasksschservice.entities.Status;
 import com.example.tasksschservice.entities.task;
 import com.example.tasksschservice.model.mission;
 import com.example.tasksschservice.repo.missionClient;
@@ -12,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -93,21 +97,67 @@ public class taskController {
         }
     }
 
-    @PutMapping("/{taskId}/add-mission/{missionId}")
-    public ResponseEntity<String> addMissionToTask(@PathVariable Long taskId, @PathVariable Long missionId) {
-        Optional<task> optionalTask = taskservice.getTaskById(taskId);
-        if (optionalTask.isPresent()) {
-            mission mission = missionclient.findMissionById(missionId);
-            if (mission == null) {
-                return new ResponseEntity<>("Mission non trouvée.", HttpStatus.NOT_FOUND);
+
+    @PostMapping("/add-mission-to-task/{taskId}")
+    public ResponseEntity<String> createMissionAndAssignToTask(
+            @PathVariable Long taskId,
+            @RequestBody mission newMission
+    ) {
+        try {
+            // 1. Créer la mission via Feign client
+            mission createdMission = missionclient.createMission(newMission);
+
+            // 2. Récupérer la tâche existante
+            Optional<task> optionalTask = taskservice.getTaskById(taskId);
+            if (optionalTask.isEmpty()) {
+                return new ResponseEntity<>("Tâche non trouvée", HttpStatus.NOT_FOUND);
             }
+
             task existingTask = optionalTask.get();
-            existingTask.setMissionId(missionId);
-            taskservice.updateTask(taskId, existingTask);
-            return new ResponseEntity<>("Mission ajoutée à la tâche avec succès.", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Tâche non trouvée.", HttpStatus.NOT_FOUND);
+
+            // 3. Initialiser si null (sécurité)
+            if (existingTask.getMissionIds() == null) {
+                existingTask.setMissionIds(new ArrayList<>());
+            }
+
+            // 4. Ajouter la nouvelle mission à la liste **sans supprimer l’ancienne**
+            existingTask.getMissionIds().add(createdMission.getId());
+
+            // 5. Sauvegarder la tâche mise à jour
+            taskservice.saveTask(existingTask);
+
+            return new ResponseEntity<>("Nouvelle mission ajoutée à la tâche existante avec succès", HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erreur : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @GetMapping("/missions-by-task/{taskId}")
+    public ResponseEntity<?> getMissionsByTask(@PathVariable Long taskId) {
+        try {
+            Optional<task> optionalTask = taskservice.getTaskById(taskId);
+            if (optionalTask.isEmpty()) {
+                return new ResponseEntity<>("Tâche non trouvée", HttpStatus.NOT_FOUND);
+            }
+            task existingTask = optionalTask.get();
+            List<Long> missionIds = existingTask.getMissionIds();
+            if (missionIds == null || missionIds.isEmpty()) {
+                return new ResponseEntity<>("Aucune mission liée à cette tâche", HttpStatus.OK);
+            }
+            List<mission> missions = new ArrayList<>();
+            for (Long missionId : missionIds) {
+                mission m = missionclient.getMissionById(missionId);
+                if (m != null) {
+                    missions.add(m);
+                }
+            }
+            return new ResponseEntity<>(missions, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erreur : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

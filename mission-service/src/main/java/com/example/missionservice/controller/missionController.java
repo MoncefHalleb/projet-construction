@@ -13,7 +13,6 @@ public class missionController {
 
     private final missionService missionservice;
 
-
     public missionController(missionService missionservice) {
         this.missionservice = missionservice;
     }

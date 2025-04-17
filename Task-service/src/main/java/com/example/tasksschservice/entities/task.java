@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,9 +30,11 @@ public class task {
     @OneToOne
     private Image image;
 
-    /*
-    @ElementCollection
-    private List<Long> missionIds;*/
 
-    private Long missionId; // 🧩 Liaison avec la mission
+    // Après
+    @ElementCollection
+    private List<Long> missionIds = new ArrayList<>();
+
+
+    //private Long missionId; // 🧩 Liaison avec la mission
 }

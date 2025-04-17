@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,7 +26,12 @@ public class task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-
     @OneToOne
     private Image image;
+
+    /*
+    @ElementCollection
+    private List<Long> missionIds;*/
+
+    private Long missionId; // 🧩 Liaison avec la mission
 }

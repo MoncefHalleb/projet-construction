@@ -2,17 +2,15 @@ package com.example.tasksschservice.controller;
 
 import com.example.tasksschservice.entities.Image;
 import com.example.tasksschservice.entities.task;
+import com.example.tasksschservice.model.mission;
+import com.example.tasksschservice.repo.missionClient;
 import com.example.tasksschservice.service.CloudinaryService;
 import com.example.tasksschservice.service.ImageService;
 import com.example.tasksschservice.service.taskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -21,14 +19,16 @@ import java.util.Optional;
 @RequestMapping("/tasks")
 public class taskController {
     private final taskService taskservice;
-
     private final CloudinaryService cloudinaryService;
     private final ImageService imageService;
+    private final missionClient missionclient;
 
-    public taskController(taskService taskService,CloudinaryService cloudinaryService,ImageService imageService) {
+    public taskController(taskService taskService,CloudinaryService cloudinaryService
+            ,ImageService imageService,missionClient missionclient ) {
         this.taskservice = taskService;
         this.cloudinaryService=cloudinaryService;
         this.imageService=imageService;
+        this.missionclient = missionclient;
     }
 
     @GetMapping
@@ -92,4 +92,22 @@ public class taskController {
             return new ResponseEntity<>("Tâche non trouvée.", HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/{taskId}/add-mission/{missionId}")
+    public ResponseEntity<String> addMissionToTask(@PathVariable Long taskId, @PathVariable Long missionId) {
+        Optional<task> optionalTask = taskservice.getTaskById(taskId);
+        if (optionalTask.isPresent()) {
+            mission mission = missionclient.findMissionById(missionId);
+            if (mission == null) {
+                return new ResponseEntity<>("Mission non trouvée.", HttpStatus.NOT_FOUND);
+            }
+            task existingTask = optionalTask.get();
+            existingTask.setMissionId(missionId);
+            taskservice.updateTask(taskId, existingTask);
+            return new ResponseEntity<>("Mission ajoutée à la tâche avec succès.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Tâche non trouvée.", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

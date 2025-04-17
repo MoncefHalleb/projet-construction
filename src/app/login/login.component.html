@@ -1,0 +1,51 @@
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <h1><i class="fas fa-sign-in-alt"></i> Welcome Back</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input id="email" formControlName="email" type="email" class="form-control"
+                        placeholder="Email Address"
+                        [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }" />
+                </div>
+                <div class="error-messages" *ngIf="f['email'].touched && f['email'].errors">
+                    <small *ngIf="f['email'].errors?.['required']">Email is required</small>
+                    <small *ngIf="f['email'].errors?.['email']">Please enter a valid email</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input id="password" formControlName="password" type="password" class="form-control"
+                        placeholder="Password"
+                        [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }" />
+                </div>
+                <div class="error-messages" *ngIf="f['password'].touched && f['password'].errors">
+                    <small *ngIf="f['password'].errors?.['required']">Password is required</small>
+                </div>
+            </div>
+
+            <div class="form-group forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+
+            <div class="register-link">
+                Don't have an account? <a routerLink="/register">Register here</a>
+            </div>
+
+            <div class="error-message" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+        </form>
+    </div>
+</div>

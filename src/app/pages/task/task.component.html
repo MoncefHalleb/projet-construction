@@ -1,0 +1,55 @@
+<button (click)="OpenTaskForm()" class="open-task-form" *ngIf="showCalendar">AddTask</button>
+<full-calendar #calendar [options]="calendarOptions" *ngIf="showCalendar"></full-calendar>
+<form *ngIf="taskForm">
+  <input type="text" [(ngModel)]="task.title" name="taskName" placeholder="Task Name">
+  <input type="text" [(ngModel)]="task.description" name="taskDescription" placeholder="Task Description">
+  <select [(ngModel)]="task.priority" name="taskPriority">
+    <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+  </select>
+  <input type="date" [(ngModel)]="task.startDate" name="taskStartDate">
+  <input type="date" [(ngModel)]="task.dueDate" name="taskEndDate">
+  <button (click)="addTask()">Add</button>
+  <button class="close-task-form" (click)="closeTaskForm()">Close</button>
+</form>
+
+<form *ngIf="showUploadForm" (submit)="onSubmit()">
+  <input type="file" (change)="onFileSelected($event)" />
+  <button type="submit">Mettre à jour la tâche</button>
+</form>
+
+<!-- From Uiverse.io by Spacious74 -->
+<div *ngIf="missionForm" class="bgblue">
+  <!-- From Uiverse.io by mrhyddenn -->
+  <div class="card">
+        <label for="missionName">Explication de la mission</label>
+        <input type="text" id="missionName" [(ngModel)]="mission.explanation" name="missionName" required>
+        <button (click)="onSubmitMission()">Ajouter</button>
+        <button class="close-task-form" (click)="closeMissionForm()">Close</button>
+  </div>
+  <div class="uiverse">
+    <span class="tooltip">related to this task</span>
+    <span (click)="openMissionListForm()" >
+        Missions
+    </span>
+  </div>
+</div>
+
+
+<div *ngIf="missionListForm" class="notification">
+  <!--bouton pour fermeture X-->
+  <div class="notiglow"></div>
+  <div class="notibody" (click)="closeMissionListForm()">X</div>
+
+  <div class="notiborderglow"></div>
+  <div class="notititle">Liste des missions</div>
+  <div class="notibody">
+    <ul>
+      <li *ngFor="let m of missions">
+        {{ m.explanation }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+

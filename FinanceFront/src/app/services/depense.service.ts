@@ -7,7 +7,6 @@ import { Depense } from '../models/depence';
   providedIn: 'root',
 })
 export class DepenseService {
-  private subject = new Subject<any>();
   constructor(public httpClient: HttpClient) {}
 
   private baseUrl = 'http://localhost:8081/api/depenses/';
@@ -21,10 +20,6 @@ export class DepenseService {
   }
   public add(data: any): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl + 'add', data);
-  }
-
-  public update(id:any, data: any): Observable<any> {
-    return this.httpClient.put<any>(this.baseUrl + 'update/'+id, data);
   }
 
   uploadFile(file: File, id: number): Observable<string> {
@@ -55,5 +50,15 @@ export class DepenseService {
 
   searchDepenses(param: string): Observable<any> {
     return this.httpClient.get(this.baseUrl + 'search', { params: { param } });
+  }
+  uploadFileDepense(file: File, id: any) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post(
+      this.baseUrl + 'uploaddepense/' + id,
+      formData,
+      { responseType: 'text' } // 👈 Spécifiez le type de réponse comme texte
+    );
   }
 }

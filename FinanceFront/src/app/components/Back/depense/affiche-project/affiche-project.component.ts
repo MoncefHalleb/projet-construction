@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
 import { TypeDepense } from 'src/app/models/typeDepense';
 import { DepenseService } from 'src/app/services/depense.service';
+import { FactureService } from 'src/app/services/facture.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,14 +29,18 @@ export class AfficheProjectComponent {
     justificatif: null,
   };
   selectedFile: File | null = null;
-
+  selectedFileupload!: File;
+  message = '';
+  selectedProjetId!: number;
+  private activeModal: any;
   private searchSubject: Subject<string> = new Subject();
   private subscription: Subscription = new Subscription();
 
   constructor(
     private depenseService: DepenseService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private factureService: FactureService
   ) {
     // Create a mapping between display values and enum keys
     this.typeDepensesMap = {};
@@ -59,6 +64,28 @@ export class AfficheProjectComponent {
     }
   }
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    console.log('Nom fichier :', file.name);
+    console.log('Taille :', file.size, 'bytes');
+    console.log('Type MIME :', file.type);
+
+    if (file && (file.name.endsWith('.xlsx') || file.name.endsWith('.csv'))) {
+      this.selectedFileupload = file;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Format non supporté',
+        text: 'Veuillez sélectionner un fichier .xlsx ou .csv',
+      });
+    }
+  }
+
+  openUploadModal(content: any, projetId: number) {
+    this.selectedProjetId = projetId;
+    this.activeModal = this.modalService.open(content);
+  }
+
   fetchAllProject() {
     this.subscription.add(
       this.depenseService.getAllProject().subscribe({
@@ -73,6 +100,21 @@ export class AfficheProjectComponent {
     );
   }
 
+  // Dans affiche-project.component.ts
+  uploadFile() {
+    this.depenseService
+      .uploadFileDepense(this.selectedFileupload, this.selectedProjetId)
+      .subscribe({
+        next: (responseText: string) => {
+          // 👈 Réponse traitée comme texte
+          Swal.fire('Succès !', responseText, 'success');
+          this.activeModal.close();
+        },
+        error: (err) => {
+          Swal.fire('Erreur', err.error || "Échec de l'import", 'error');
+        },
+      });
+  }
   // **Ouvrir le Modal**
   openModal(content: any, idProjet: any): void {
     this.nouvelleDepense.idProjet = idProjet;
@@ -116,7 +158,7 @@ export class AfficheProjectComponent {
         }
         Swal.fire({
           title: 'Success!',
-          text: 'The Depense has been added successfully.',
+          text: 'The Project has been added successfully.',
           icon: 'success', // Icône pour succès : success, error, warning, info, question
           confirmButtonText: 'OK',
         });
@@ -131,5 +173,30 @@ export class AfficheProjectComponent {
 
   viewDepense(id: number): void {
     this.router.navigate(['/afficheDepense/', id]);
+  }
+
+  upload(id: any) {
+    const formData = new FormData();
+    formData.append('file', this.selectedFileupload);
+    this.depenseService
+      .uploadFileDepense(this.selectedFileupload, id)
+      .subscribe({
+        next: () => (this.message = 'Fichier importé avec succès !'),
+        error: (err) =>
+          (this.message = "Erreur lors de l'import : " + err.error),
+      });
+  }
+
+  generateFacture(id: number): void {
+    this.factureService.add(id).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.error(error),
+    });
+    Swal.fire({
+      title: 'Success!',
+      text: 'Facture Generate Success successfully.',
+      icon: 'success', // Icône pour succès : success, error, warning, info, question
+      confirmButtonText: 'OK',
+    });
   }
 }

@@ -17,10 +17,11 @@ public class Facture {
     public Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_depense")
-    public Depense depense;
+    @JoinColumn(name = "id_projet")
+    public Project project;
 
-
+    @Lob
+    private byte[] pdfData;
 
     public String numFacture;
 
@@ -37,15 +38,13 @@ public class Facture {
         return id;
     }
 
-    public Depense getDepense() {
-        return depense;
+    public Project getProject() {
+        return project;
     }
 
-    public void setDepense(Depense depense) {
-        this.depense = depense;
+    public void setProject(Project project) {
+        this.project = project;
     }
-
-
 
     public String getNumFacture() {
         return numFacture;
@@ -69,6 +68,14 @@ public class Facture {
 
     public void setMontantTotal(Double montantTotal) {
         this.montantTotal = montantTotal;
+    }
+
+    public byte[] getPdfData() {
+        return pdfData;
+    }
+
+    public void setPdfData(byte[] pdfData) {
+        this.pdfData = pdfData;
     }
 }
 

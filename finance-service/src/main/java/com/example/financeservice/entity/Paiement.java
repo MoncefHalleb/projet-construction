@@ -68,7 +68,3 @@ public class Paiement {
     }
 }
 
-enum MethodePaiement {
-    VIREMENT, CHEQUE, LIQUIDE
-}
-

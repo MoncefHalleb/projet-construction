@@ -32,6 +32,7 @@ export class VoirDepenseComponent {
     date: '',
     justificatif: null,
   };
+
   constructor(
     private depenseService: DepenseService,
     private route: ActivatedRoute,
@@ -69,6 +70,7 @@ export class VoirDepenseComponent {
     this.idDespense = idepense;
     this.fetchDepenseById(idepense);
     this.modalService.open(content, { centered: true, size: 'lg' });
+    this.onSearch('');
   }
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -91,7 +93,7 @@ export class VoirDepenseComponent {
       this.depenseService.searchDepenses(searchText).subscribe({
         next: (res: any) => {
           this.data = res;
-          console.log('Résultats de la recherch e', this.data);
+          console.log('Résultats de la recherche', this.data);
         },
         error: (err) => {
           console.error('Erreur lors de la recherche des tests:', err);
@@ -202,10 +204,11 @@ export class VoirDepenseComponent {
       montant: this.nouvelleDepense.montant,
       type: typeKey, // Use the display value directly
       description: this.nouvelleDepense.description,
+      fileData: null,
     };
 
     console.log('Dépense à envoyer:', newDepense);
-    this.depenseService.update(this.idDespense, newDepense).subscribe({
+    this.depenseService.edit(this.idDespense, newDepense).subscribe({
       next: (createdDepense) => {
         console.log('Dépense ajoutée:', createdDepense);
         Swal.fire({

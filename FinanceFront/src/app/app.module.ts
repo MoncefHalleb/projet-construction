@@ -29,6 +29,8 @@ import { ProfileHrComponent } from './components/Front/profile-hr/profile-hr.com
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AfficheProjectComponent } from './components/Back/depense/affiche-project/affiche-project.component';
 import { VoirDepenseComponent } from './components/Back/depense/voir-depense/voir-depense.component';
+import { FactureListComponent } from './components/Back/facture/facture-list/facture-list.component';
+import { PaiementComponent } from './components/Back/facture/paiement/paiement.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { VoirDepenseComponent } from './components/Back/depense/voir-depense/voi
     ProfileHrComponent,
     AfficheProjectComponent,
     VoirDepenseComponent,
+    FactureListComponent,
+    PaiementComponent,
   ],
   imports: [
     NgxPaginationModule,

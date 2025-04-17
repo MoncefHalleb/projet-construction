@@ -17,6 +17,8 @@ import { HomeHrComponent } from './components/Front/hrDashboard/home-hr/home-hr.
 import { ProfileHrComponent } from './components/Front/profile-hr/profile-hr.component';
 import { AfficheProjectComponent } from './components/Back/depense/affiche-project/affiche-project.component';
 import { VoirDepenseComponent } from './components/Back/depense/voir-depense/voir-depense.component';
+import { FactureListComponent } from './components/Back/facture/facture-list/facture-list.component';
+import { PaiementComponent } from './components/Back/facture/paiement/paiement.component';
 
 const routes: Routes = [
   { path: '', component: HomeFrontComponent },
@@ -36,6 +38,8 @@ const routes: Routes = [
 
   { path: 'project', component: AfficheProjectComponent },
   { path: 'afficheDepense/:id', component: VoirDepenseComponent },
+  { path: 'facture', component: FactureListComponent },
+  { path: 'payment', component: PaiementComponent },
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import com.example.financeservice.entity.Depense;
 import com.example.financeservice.entity.Project;
 import com.example.financeservice.service.DepenseService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,14 +37,13 @@ public class DepenseController {
 
     @PostMapping("/add")
     public Depense create(@RequestBody Depense depense) {
-        System.out.println("Dépense reçue : " + depense);
         return service.save(depense);
     }
 
     @PutMapping("/update/{id}")
     public Depense update(@PathVariable Long id, @RequestBody Depense depense) {
         depense.setId(id);
-        return service.edit(id,depense);
+        return service.save(depense);
     }
 
     @DeleteMapping("/{id}")
@@ -82,6 +82,17 @@ public class DepenseController {
     public ResponseEntity<List<Depense>> getAllByParam(@RequestParam String param) {
         List<Depense> interviews = service.getAllSearch(param);
         return ResponseEntity.ok(interviews);
+    }
+
+
+    @PostMapping("/uploaddepense/{id}")
+    public ResponseEntity<String> uploadFileDepense(@RequestParam("file") MultipartFile file,@PathVariable Long id) {
+        try {
+            service.processDepenseExcelFile(file,id);
+            return ResponseEntity.ok("Fichier traité avec succès !"); // 👈 JSON
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors du traitement : " + e.getMessage());
+        }
     }
 }
 

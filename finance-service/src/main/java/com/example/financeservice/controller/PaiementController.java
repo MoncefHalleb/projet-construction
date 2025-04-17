@@ -1,13 +1,20 @@
 package com.example.financeservice.controller;
 
+import com.example.financeservice.entity.Facture;
 import com.example.financeservice.entity.Paiement;
 import com.example.financeservice.service.PaiementService;
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/paiements")
+@CrossOrigin("*")
 public class PaiementController {
 
     private final PaiementService service;
@@ -43,6 +50,18 @@ public class PaiementController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+
+
+
+    @PostMapping("/create-payment-intent")
+    public ResponseEntity<Map<String, String>> createPaymentIntent(@RequestBody Facture facture) throws  StripeException {
+
+        PaymentIntent intent = service.createPaymentIntent(facture);
+        Map<String, String> response = new HashMap<>();
+        response.put("clientSecret", intent.getClientSecret());
+        return ResponseEntity.ok(response);
     }
 }
 

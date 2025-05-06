@@ -255,4 +255,6 @@ export class TaskComponent implements OnInit {
       this.showCalendar = true; // Afficher le calendrier
       this.taskForm = false; // Masquer le formulaire de tâche
       }
+
+      //aazeyyrh
 }

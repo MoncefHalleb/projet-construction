@@ -1,0 +1,44 @@
+.floating-cart {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff5f13;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: background 0.3s ease;
+  }
+  
+  .floating-cart:hover {
+    background-color: #e24e05;
+  }
+  
+  .floating-cart .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #fff;
+    color: #ff5f13;
+    font-size: 12px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  
+  .cart-preview {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 220px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    z-index: 999;
+  }
+  

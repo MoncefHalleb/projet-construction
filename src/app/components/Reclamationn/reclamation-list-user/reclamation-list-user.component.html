@@ -1,0 +1,36 @@
+<h1 class="text-center mb-5 display-5 fw-bold text-dark">📬 Vos Réclamations</h1>
+
+<form [formGroup]="reclamationListForm">
+  <div class="card-grid">
+    <div
+      class="reclamation-card shadow-lg animate-fade-in"
+      *ngFor="let reclamation of reclamations"
+    >
+      <h3 class="card-title text-accent">{{ reclamation.title }}</h3>
+
+      <p class="reclamation-info"><strong>Type :</strong> {{ reclamation.typeReclamation }}</p>
+      <p class="reclamation-info"><strong>Description :</strong> {{ reclamation.description_Reclamation }}</p>
+      <p class="reclamation-info"><strong>Date :</strong> {{ reclamation.date_Reclamation }}</p>
+      <p class="reclamation-info">
+        <strong>Réponse automatique :</strong><br />
+        <em>{{ reclamation.autoReply || 'Pas de réponse générée' }}</em>
+      </p>
+      
+
+      <div class="card-actions d-flex justify-content-between mt-4">
+        <button
+          (click)="deleteReclamation(reclamation.id_Reclamation)"
+          class="btn btn-outline-danger fw-bold"
+        >
+          🗑 Supprimer
+        </button>
+        <button
+          (click)="goToEditReclamation(reclamation.id_Reclamation)"
+          class="btn btn-outline-warning fw-bold"
+        >
+          ✏️ Modifier
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

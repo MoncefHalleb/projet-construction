@@ -1,0 +1,40 @@
+<div class="container mt-5 mb-5">
+  <h2 class="mb-4 text-dark fw-bold"><i class="bi bi-receipt-cutoff"></i> Order Summary</h2>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">🛒 Article</th>
+            <th scope="col">📦 Type</th>
+            <th scope="col">🔢 Quantity</th>
+            <th scope="col">💰 Unit Price</th>
+            <th scope="col">🧮 Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of basketItems">
+            <td>{{ item.article.name }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.article.price | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td>{{ item.article.price * item.quantity | currency:'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tbody>
+        <tfoot class="table-light">
+          <tr>
+            <td colspan="4" class="text-end fw-bold">Total:</td>
+            <td class="fw-bold text-primary">{{ total | currency:'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="text-end mt-4">
+        <button class="btn btn-success px-4 py-2 fw-semibold" (click)="confirmOrder()">
+          ✅ Confirm Order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="card h-100 shadow-lg rounded-4 p-4 text-center article-card-lg">
+  <!-- Image -->
+  <img
+  *ngIf="article.image"
+  [src]="'assets/articles/' + article.image"
+  alt="Article image"
+  class="card-img-top mx-auto mb-4"
+  style="max-height: 280px; object-fit: contain; border-radius: 16px;"
+/>
+
+
+  <!-- Content -->
+  <div class="card-body">
+    <h3 class="card-title fw-bold mb-3 text-dark" style="font-size: 1.8rem;">{{ article.name }}</h3>
+
+    <!-- Stock Badge -->
+    <span
+      class="badge mb-3 px-4 py-2 fs-5 rounded-pill"
+      [ngClass]="{
+        'bg-success': article.stock > 3,
+        'bg-warning text-dark': article.stock > 0 && article.stock <= 3,
+        'bg-danger': article.stock === 0
+      }"
+    >
+      {{
+        article.stock === 0
+          ? 'Out of Stock'
+          : article.stock <= 3
+          ? 'Low Stock'
+          : 'In Stock'
+      }}
+    </span>
+
+    <p class="mb-4 fs-5 text-muted">
+      <strong>Stock:</strong> {{ article.stock }}
+    </p>
+
+    <!-- Quantity + Actions -->
+    <ng-container *ngIf="article.stock > 0">
+      <div class="input-group input-group-lg justify-content-center mb-4" style="max-width: 200px; margin: 0 auto;">
+        <button
+          class="btn btn-outline-danger"
+          type="button"
+          (click)="decrement()"
+          [disabled]="quantity <= 1"
+        >−</button>
+
+        <input
+          type="number"
+          class="form-control text-center fs-5"
+          [(ngModel)]="quantity"
+          [min]="1"
+          [max]="article.stock"
+          style="width: 70px;"
+        />
+
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          (click)="increment()"
+          [disabled]="quantity >= article.stock"
+        >+</button>
+      </div>
+
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <button
+          class="btn btn-success px-5 py-2 fs-5"
+          (click)="acheter()"
+          [disabled]="!quantity || quantity > article.stock"
+        >
+          🛒 Acheter
+        </button>
+        <button
+          class="btn btn-warning text-dark px-5 py-2 fs-5"
+          (click)="generateArticleDescription(article.articleId)"
+        >
+          🔍 Description
+        </button>
+        <button
+          class="btn btn-primary px-5 py-2 fs-5"
+          (click)="louer()"
+          [disabled]="!quantity || quantity > article.stock"
+        >
+          📦 Louer
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

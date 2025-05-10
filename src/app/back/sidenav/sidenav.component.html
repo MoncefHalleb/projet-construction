@@ -1,0 +1,94 @@
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a *ngFor="let nav of navBar" class="nav-link" [routerLink]="nav.link">
+                        <div class="sb-nav-link-icon">
+                            <i [class]="nav.icon"></i>
+                        </div>
+                        {{ nav.label }}
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Management</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#userSection">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        Users
+                        <div class="sb-sidenav-collapse-arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </a>
+                    <div class="collapse" id="userSection">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" routerLink="/admins">List users</a>
+                            <a class="nav-link" routerLink="add">Create user</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#orderSection">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        Order
+                        <div class="sb-sidenav-collapse-arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </a>
+                    <div class="collapse" id="orderSection">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" routerLink="orders">List Orders</a>
+                            <a class="nav-link" routerLink="addOrder">Create Order</a>
+                        </nav>
+                    </div>
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#articleSection">
+                        <div class="sb-nav-link-icon"><i class="fas fa-newspaper"></i></div>
+                        Article
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="articleSection">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" routerLink="articles">List Articles</a>
+                            <a class="nav-link" routerLink="addArticle">Create Article</a>
+                        </nav>
+                    </div>
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#basketSection">
+                        <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
+                        Basket
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="basketSection">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" routerLink="baskets">List Baskets</a>
+                            <a class="nav-link" routerLink="addBasket">Create Basket</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link" routerLink="projects">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        Projects
+                    </a>
+                    <a class="nav-link" routerLink="etudes">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        Études
+                    </a>
+                    <a class="nav-link" routerLink="weather">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        Weather
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+</div>

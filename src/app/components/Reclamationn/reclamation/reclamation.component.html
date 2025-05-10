@@ -1,0 +1,43 @@
+<div class="entries-section-container enhanced-reclamation-form mt-5">
+  <h2 class="form-title">Déposer une Réclamation</h2>
+  <p class="form-subtitle">Veuillez remplir les informations nécessaires. Vous pouvez également joindre un document justificatif au format PDF.</p>
+
+  <form [formGroup]="reclamationForm" (ngSubmit)="onSubmit()" class="full-width">
+    <div class="form-layout-grid">
+
+      <!-- Titre -->
+      <div class="form-field-block">
+        <label for="title" class="text">Titre <span class="text-danger">*</span></label>
+        <input type="text" id="title" formControlName="title" placeholder="Ex. : Problème de facturation">
+      </div>
+
+      <!-- Type de réclamation -->
+      <div class="form-field-block">
+        <label for="typeReclamation" class="text">Type de réclamation <span class="text-danger">*</span></label>
+        <select id="typeReclamation" formControlName="typeReclamation">
+          <option value="">-- Sélectionner un type --</option>
+          <option *ngFor="let type of typeReclamation" [value]="type.type">{{ type.type }}</option>
+        </select>
+      </div>
+
+      <!-- Description -->
+      <div class="form-field-block">
+        <label for="description" class="text">Description <span class="text-danger">*</span></label>
+        <textarea id="description" formControlName="description_Reclamation" rows="5" placeholder="Décrivez clairement votre réclamation..."></textarea>
+      </div>
+
+      <!-- Pièce jointe -->
+      <div class="form-field-block">
+        <label for="fileUpload" class="text">Joindre un fichier (PDF)</label>
+        <input type="file" id="fileUpload" (change)="onFileSelected($event)" accept=".pdf">
+      </div>
+
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="form-actions mt-4">
+      <button type="submit" class="btn btn-confirm">📤 Envoyer</button>
+      <button type="button" class="btn btn-cancel" (click)="onDelete()">🗑 Réinitialiser</button>
+    </div>
+  </form>
+</div>

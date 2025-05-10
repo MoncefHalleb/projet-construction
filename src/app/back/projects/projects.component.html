@@ -1,0 +1,188 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Project Management</h2>
+
+  <!-- Tabs for Project Management -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="currentTab === 'form'" (click)="currentTab = 'form'" role="tab">Add/Edit
+        Project</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="currentTab === 'map'" (click)="currentTab = 'map'; initMap()"
+        role="tab">Map</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="currentTab === 'weather'" (click)="currentTab = 'weather'; fetchWeather()"
+        role="tab">Weather</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="currentTab === 'list'" (click)="currentTab = 'list'" role="tab">Project
+        List</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <!-- Project Form Tab -->
+    <div *ngIf="currentTab === 'form'" class="mt-3">
+      <div class="card p-4 mt-3">
+        <h5 class="card-title">{{ selectedProject.id ? 'Edit Project' : 'Add Project' }}</h5>
+        <form (ngSubmit)="saveProject()" #projectForm="ngForm" class="row g-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Project Name</label>
+            <input type="text" id="name" [(ngModel)]="selectedProject.name" name="name" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" id="location" [(ngModel)]="selectedProject.location" name="location" class="form-control"
+              required>
+          </div>
+
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" [(ngModel)]="selectedProject.description" name="description" class="form-control"
+              rows="3" required></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" [(ngModel)]="selectedProject.status" name="status" class="form-control" required>
+              <option value="Planned">Planned</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" id="startDate" [(ngModel)]="selectedProject.startDate" name="startDate"
+              class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="date" id="endDate" [(ngModel)]="selectedProject.endDate" name="endDate" class="form-control"
+              required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="file" class="form-label">Upload Document</label>
+            <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Upload via Dropbox</label>
+            <button type="button" class="btn btn-info w-100" (click)="openDropboxChooser()">Select from Dropbox</button>
+          </div>
+
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save Project</button>
+            <button type="button" class="btn btn-secondary ms-2" (click)="resetProject()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map Tab -->
+    <div *ngIf="currentTab === 'map'" class="mt-3">
+      <div class="card p-4 mt-3">
+        <h5 class="card-title">Project Location Map</h5>
+        <div id="map" style="width: 100%; height: 400px; border-radius: 5px;"></div>
+        <div class="mt-3" *ngIf="selectedProject.latitude && selectedProject.longitude">
+          <h6>Selected Coordinates</h6>
+          <p><strong>Latitude:</strong> {{ selectedProject.latitude }}</p>
+          <p><strong>Longitude:</strong> {{ selectedProject.longitude }}</p>
+        </div>
+        <button class="btn btn-outline-secondary mt-2" (click)="toggleMapSize()">
+          {{ mapExpanded ? 'Collapse Map' : 'Expand Map' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Weather Tab -->
+    <div *ngIf="currentTab === 'weather'" class="mt-3">
+      <div class="card p-4 mt-3">
+        <h5 class="card-title">Get Weather Information</h5>
+        <!-- Input form for entering a city name -->
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Enter city name" [(ngModel)]="weatherCity"
+            name="weatherCity">
+        </div>
+        <button class="btn btn-primary" (click)="fetchWeather()">Get Weather</button>
+      </div>
+
+      <!-- Display weather info if available -->
+      <div class="card p-4 mt-3" *ngIf="weather">
+        <h5 class="card-title">Weather Information for {{ weather.city }}</h5>
+        <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+        <p><strong>Condition:</strong> {{ weather.description }}</p>
+        <p><strong>Humidity:</strong> {{ weather.main?.humidity }}%</p>
+        <p><strong>Wind Speed:</strong> {{ weather.wind?.speed }} m/s</p>
+        <p><strong>Visibility:</strong> {{ weather.visibility / 1000 }} km</p>
+        <p><strong>Pressure:</strong> {{ weather.main?.pressure }} hPa</p>
+        <p><strong>Cloudiness:</strong> {{ weather.clouds?.all }}%</p>
+        <p><strong>Feels Like:</strong> {{ weather.main?.feels_like }}°C</p>
+
+        <!-- Sunrise and Sunset times -->
+        <p *ngIf="weather.sys?.sunrise"><strong>Sunrise:</strong> {{ getTime(weather.sys.sunrise) }}</p>
+        <p *ngIf="weather.sys?.sunset"><strong>Sunset:</strong> {{ getTime(weather.sys.sunset) }}</p>
+      </div>
+
+      <!-- Message if no weather data is available -->
+      <div class="card p-4 mt-3" *ngIf="!weather">
+        <p class="text-muted">No weather data available. Please enter a city and click "Get Weather".</p>
+      </div>
+    </div>
+
+    <!-- Project List Tab -->
+    <div *ngIf="currentTab === 'list'" class="mt-3">
+      <div class="card p-4 mt-3">
+        <h5 class="card-title">Project List</h5>
+        <input type="text" placeholder="Search projects..." (input)="onSearchInput($event)" class="form-control mb-3" />
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th (click)="sortProjects('name')">Name ↕</th>
+                <th (click)="sortProjects('location')">Location ↕</th>
+                <th (click)="sortProjects('status')">Status ↕</th>
+                <th (click)="sortProjects('startDate')">Start Date ↕</th>
+                <th (click)="sortProjects('endDate')">End Date ↕</th>
+                <th (click)="sortProjects('latitude')">Latitude ↕</th>
+                <th (click)="sortProjects('longitude')">Longitude ↕</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let project of projects">
+                <td>{{ project.name }}</td>
+                <td>{{ project.location }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.startDate }}</td>
+                <td>{{ project.endDate }}</td>
+                <td>{{ project.latitude || 'N/A' }}</td>
+                <td>{{ project.longitude || 'N/A' }}</td>
+                <td>
+                  <button class="btn btn-warning btn-sm me-1" (click)="editProject(project)">Edit</button>
+                  <button class="btn btn-danger btn-sm me-1" (click)="deleteProject(project.id!)">Delete</button>
+                  <button class="btn btn-info btn-sm" *ngIf="project.documents"
+                    (click)="downloadFile(project.documents)">Download</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <button class="btn btn-outline-primary" (click)="fetchProjects(searchQuery, currentPage - 1)"
+            [disabled]="currentPage === 0">Previous</button>
+          <span>Page {{ currentPage + 1 }}</span>
+          <button class="btn btn-outline-primary" (click)="fetchProjects(searchQuery, currentPage + 1)"
+            [disabled]="projects.length < pageSize">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

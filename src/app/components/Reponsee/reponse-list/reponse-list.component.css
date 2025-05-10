@@ -1,0 +1,156 @@
+/* Styles for the mat-stepper and form fields */
+.mat-stepper-horizontal {
+  background-color: #ffffff;
+  padding: 1rem;
+}
+
+.mat-step-header {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.mat-step-header .mat-step-icon-selected {
+  background-color: #4CAF50;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-label {
+  color: #4CAF50;
+}
+
+.mat-input-element {
+  background-color: #ffffff;
+}
+
+.mat-step-label {
+  color: #4CAF50;
+}
+
+/* Custom styles for buttons */
+.mat-stepper-horizontal .mat-stepper-next,
+.mat-stepper-horizontal .mat-stepper-previous,
+.mat-stepper-horizontal .mat-stepper-reset {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.mat-stepper-horizontal .mat-stepper-next:hover,
+.mat-stepper-horizontal .mat-stepper-previous:hover,
+.mat-stepper-horizontal .mat-stepper-reset:hover {
+  background-color: #45a249;
+}
+
+.mat-stepper-horizontal .mat-stepper-next:focus,
+.mat-stepper-horizontal .mat-stepper-previous:focus,
+.mat-stepper-horizontal .mat-stepper-reset:focus {
+  box-shadow: none;
+}
+
+.mat-stepper-horizontal .mat-stepper-next:active,
+.mat-stepper-horizontal .mat-stepper-previous:active,
+.mat-stepper-horizontal .mat-stepper-reset:active {
+  background-color: #3f8d41;
+}
+
+/* Additional styles for the resume */
+.header {
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  margin: 2rex;
+}
+
+.entries-section-container {
+  width: 80%;
+  background-color: #ffffff;
+  padding: 2rem;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.form-field {
+  flex-basis: 40%;
+  display: flex;
+  padding: 2.1rem;
+  flex-direction: column;
+}
+
+.form-field-block {
+  flex-basis: 90%;
+  flex-grow: 1;
+}
+
+.form-actions {
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.text {
+  font-size: 18px;
+  color: #424244;
+}
+.form-actions-button {
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+}
+.space{
+  margin-left: 0.02rex;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+.space{
+  margin-left: 1rex;
+}
+.table-auto {
+  table-layout: fixed;
+  position: relative;
+  width: 80%;
+  height: -webkit-fill-available;
+  margin-left: 7rem;
+}
+.centre {
+  text-align: center;
+}
+.Button_Edit {
+  border: 2px solid #000000;
+  background-color: white ;
+  color: #000000;
+  font-size: 12px;
+  border-radius: 0.5rem;
+  transition: background-color 0.5s;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.Button_Edit :hover {
+  background-color: black;
+  color: white;
+}

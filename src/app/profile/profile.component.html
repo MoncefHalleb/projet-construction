@@ -1,0 +1,68 @@
+<div class="profile-wrapper">
+  <!-- Profile Top -->
+  <mat-card class="profile-card">
+    <div class="profile-top">
+      <img [src]="profilePicUrl || 'assets/default-avatar.png'" class="avatar" alt="Profile Picture" />
+      <div class="user-details">
+        <h1>{{ userProfile.firstName }} {{ userProfile.lastName }}</h1>
+        <p class="email">{{ userProfile.email }}</p>
+        <mat-card class="role-card">
+          <span class="role-text">{{ role | uppercase }}</span>
+        </mat-card>      </div>
+    </div>
+  </mat-card>
+  
+
+  <!-- Stats -->
+  <div class="profile-stats">
+    <div class="stat">
+      <label>User ID</label>
+      <p>{{ userProfile.id }}</p>
+    </div>
+    <div class="stat">
+      <label>Last Login</label>
+      <p>{{ lastLogin }}</p>
+    </div>
+    <div class="stat">
+      <label>Joined</label>
+      <p>{{ formattedCreationDate || 'N/A' }}</p>
+    </div>
+  </div>
+
+  <!-- Upload & Actions -->
+  <div class="profile-actions">
+    <input type="file" (change)="onFileSelected($event)" class="upload-file" />
+    <div class="buttons">
+      <button class="btn primary" (click)="updateUser()">Edit Profile</button>
+      <button class="btn secondary" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Login History -->
+  <div class="login-history">
+    <h2>📚 Recent Login History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>IP</th>
+          <th>Device</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of loginHistory">
+          <td>{{ event.timestamp }}</td>
+          <td>{{ event.ip }}</td>
+          <td>{{ event.device }}</td>
+          <td>
+            <ng-container *ngIf="event.location?.city && event.location?.country; else fallback">
+              {{ event.location.city }}, {{ event.location.country }}
+            </ng-container>
+            <ng-template #fallback>{{ event.location }}</ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

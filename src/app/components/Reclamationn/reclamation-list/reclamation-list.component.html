@@ -1,0 +1,63 @@
+<div class="entries-section-container mt-5">
+  <h2 class="form-title centre">📋 Liste des Réclamations</h2>
+
+  <form [formGroup]="reclamationListForm" class="search-container d-flex gap-2 mb-4">
+    <input type="text" class="form-control" formControlName="searchTerm" placeholder="🔍 Rechercher par titre">
+    <button type="button" class="btn btn-confirm" (click)="searchReclamations()">Rechercher</button>
+    <button type="button" class="btn btn-secondary" (click)="resetFilter()">Réinitialiser</button>
+    <button type="button" class="btn btn-warning" (click)="filterEscalated()">ESCALATED uniquement</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-auto table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titre</th>
+          <th>Type</th>
+          <th>Statut</th>
+          <th>Note Assistant IA</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of displayedReclamations"
+            [ngClass]="{ 'escalated-row': reclamation.statutReclamation === 'ESCALATED' }">
+
+          <td>{{ reclamation.id_Reclamation }}</td>
+          <td>{{ reclamation.title }}</td>
+          <td>{{ reclamation.typeReclamation }}</td>
+
+          <!-- Statut avec badge dynamique -->
+          <td>
+            <span class="badge" [ngClass]="{
+              'badge-success': reclamation.statutReclamation === 'TRAITEE',
+              'badge-warning': reclamation.statutReclamation === 'EN_COURS',
+              'badge-secondary': reclamation.statutReclamation === 'A LETUDE',
+              'badge-danger': reclamation.statutReclamation === 'ESCALATED',
+              'badge-info': reclamation.statutReclamation === 'EN_ATTENTE' || reclamation.statutReclamation === 'PENDING_REVIEW'
+            }">
+              {{ reclamation.statutReclamation }}
+            </span>
+          </td>
+
+          <!-- Note IA -->
+          <td>
+            <span *ngIf="reclamation.adminNote; else noNote">{{ reclamation.adminNote }}</span>
+            <ng-template #noNote><i class="text-muted">Aucune</i></ng-template>
+          </td>
+
+          <!-- Actions -->
+          <td class="form-actions-button">
+            <button class="btn btn-sm btn-outline-primary" (click)="goToEditReclamation(reclamation.id_Reclamation)">
+              ✏️ Modifier
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteReclamation(reclamation.id_Reclamation)">
+              🗑 Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

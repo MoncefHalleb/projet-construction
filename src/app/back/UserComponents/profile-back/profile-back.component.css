@@ -1,0 +1,48 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f4;
+  }
+  
+  .profile-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  p {
+    color: #555;
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  
+  .highlight {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .admin-role {
+    color: #d9534f;
+    font-weight: bold;
+  }
+  
+  .user-role {
+    color: #5bc0de;
+    font-weight: bold;
+  }
+  
+  .greeting {
+    margin-top: 15px;
+    font-style: italic;
+    color: #777;
+  }
+  

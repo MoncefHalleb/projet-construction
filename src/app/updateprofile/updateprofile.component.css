@@ -1,0 +1,77 @@
+.container {
+  max-width: f;
+  margin: 40px auto;
+  padding: 20px;
+  background: #000000;
+  border-radius: 20px;
+  gap: 20px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1c1c1c;
+  font-size: 20px;
+
+}
+
+.card {
+  padding: 20px;
+  background: #000000;
+  border-radius: 10px;
+  border: 10px solid #ddd;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+  max-width: full-width;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: larger;
+  margin-bottom: 5px;
+  color: #fff6f6;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 20px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 30px;
+}
+
+input[type="submit"],
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffa200;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+input[type="submit"]:disabled,
+button[type="submit"]:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}

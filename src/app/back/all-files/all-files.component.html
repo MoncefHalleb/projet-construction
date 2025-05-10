@@ -1,0 +1,18 @@
+<!-- all-files.component.html -->
+<h1>Liste des fichiers envoyés</h1>
+<table>
+    <thead>
+      <tr>
+        <th>Nom de l'étudiant</th>
+        <th>Type</th>
+        <th>Lien vers le fichier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <td>{{ file.user.identifiant }}</td>
+        <td>{{ file.type }}</td>
+        <td><a href="{{ file.fileurl }}" target="_blank">Lien</a></td>
+      </tr>
+    </tbody>
+  </table>

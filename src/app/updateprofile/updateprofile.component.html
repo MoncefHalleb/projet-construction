@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4">User Information</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email">
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName" placeholder="First Name">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName" placeholder="Last Name">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" class="form-select" formControlName="role">
+          <option value="">Select a role</option>
+          <option value="user">User</option>
+          <option value="ingenieur">Ingenieur</option>
+        </select>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary w-50" [disabled]="userForm.invalid">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

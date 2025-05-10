@@ -1,0 +1,61 @@
+<div class="container">
+    <h2>Building Cost Estimator</h2>
+  
+    <form (ngSubmit)="submit()">
+      <div class="form-group">
+        <label>Permit Type</label>
+        <select class="form-control" [(ngModel)]="data.permit_type" name="permit_type" required>
+          <option *ngFor="let type of permitTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Existing Construction Type</label>
+        <select class="form-control" [(ngModel)]="data.existing_construction" name="existing_construction" required>
+          <option *ngFor="let type of existingConstructionTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Proposed Construction Type</label>
+        <select class="form-control" [(ngModel)]="data.proposed_construction" name="proposed_construction" required>
+          <option *ngFor="let type of proposedConstructionTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Neighborhood</label>
+        <select class="form-control" [(ngModel)]="data.neighborhood" name="neighborhood" required>
+          <option *ngFor="let area of neighborhoods" [value]="area">{{ area }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Material Type</label>
+        <select class="form-control" [(ngModel)]="data.material_type" name="material_type" required>
+          <option *ngFor="let material of materialTypes" [value]="material">{{ material }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Materials Cost ($)</label>
+        <input type="number" class="form-control" [(ngModel)]="data.materials_cost" name="materials_cost" required>
+      </div>
+  
+      <div class="form-group">
+        <label>Labor Cost ($)</label>
+        <input type="number" class="form-control" [(ngModel)]="data.labor_cost" name="labor_cost" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3">Predict</button>
+    </form>
+  
+    <div *ngIf="predictedCost !== null" class="alert alert-success mt-4">
+      Predicted Cost: <strong>${{ predictedCost }}</strong>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger mt-4">
+      {{ errorMessage }}
+    </div>
+  </div>
+  

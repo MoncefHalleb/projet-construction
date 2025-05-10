@@ -1,0 +1,32 @@
+<div class="chatbot-container" *ngIf="isChatOpen">
+    <div class="chatbot-header">
+        <span>Chat with Us</span>
+        <button class="chatbot-toggle-btn" (click)="toggleChat()">−</button>
+    </div>
+    <div class="chatbot-body">
+        <div class="chatbot-messages" #chatMessages>
+            <div *ngFor="let msg of messages; trackBy: trackByIndex" class="message-wrapper" [ngClass]="msg.sender">
+                <ng-container *ngIf="msg.sender === 'user'">
+                    <div class="message-content user">
+                        <div class="message-text">{{ msg.text }}</div>
+                        <img src="assets/img/user.jpg" class="avatar" alt="User" />
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="msg.sender === 'bot'">
+                    <div class="message-content bot">
+                        <img src="assets/img/chat.png" class="avatar" alt="Bot" />
+                        <div class="message-text">{{ msg.text }}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" [(ngModel)]="newMessage" [disabled]="loading" (keydown.enter)="sendMessage()"
+                placeholder="Type your message..." />
+            <button (click)="sendMessage()" [disabled]="loading">Send</button>
+        </div>
+    </div>
+</div>
+<button class="chatbot-float-btn" *ngIf="!isChatOpen" (click)="toggleChat()">
+    💬
+</button>

@@ -1,0 +1,74 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Create Article</h1>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-plus-circle me-1"></i>
+        Add New Article
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  
+          <!-- 🔤 Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" class="form-control" formControlName="name" />
+            <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger small">
+              Name is required
+            </div>
+          </div>
+  
+          <!-- 📝 Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+          </div>
+  
+          <!-- 💲 Price -->
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input id="price" type="number" class="form-control" formControlName="price" />
+            <div *ngIf="form.get('price')?.invalid && form.get('price')?.touched" class="text-danger small">
+              Price must be greater than or equal to 0
+            </div>
+          </div>
+  
+          <!-- 📦 Stock -->
+          <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input id="stock" type="number" class="form-control" formControlName="stock" />
+            <div *ngIf="form.get('stock')?.invalid && form.get('stock')?.touched" class="text-danger small">
+              Stock must be 0 or higher
+            </div>
+          </div>
+  
+          <!-- 🏷️ Type -->
+          <div class="mb-3">
+            <label for="type" class="form-label">Type</label>
+            <input id="type" type="text" class="form-control" formControlName="type" />
+            <div *ngIf="form.get('type')?.invalid && form.get('type')?.touched" class="text-danger small">
+              Type is required
+            </div>
+          </div>
+  
+          <!-- 🖼️ Image Upload -->
+          <div class="mb-3">
+            <label for="image" class="form-label">Optional Image (for future)</label>
+            <input
+              id="image"
+              type="file"
+              class="form-control"
+              accept=".png,.jpg,.jpeg"
+              (change)="onFileChange($event)"
+            />
+          </div>
+  
+          <!-- ✅ Submit -->
+          <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+            <i class="fas fa-check-circle me-1"></i> Submit
+          </button>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  

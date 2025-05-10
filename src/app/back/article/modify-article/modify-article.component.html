@@ -1,0 +1,67 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Edit Article</h1>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-edit me-1"></i> Modify Article
+      </div>
+      <div class="card-body">
+        <div *ngIf="isLoading" class="text-center my-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+  
+        <form *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <!-- 🧾 Shared with Add Form -->
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" formControlName="name" />
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" formControlName="description"></textarea>
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" formControlName="price" />
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label">Stock</label>
+            <input type="number" class="form-control" formControlName="stock" />
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label">Type</label>
+            <input type="text" class="form-control" formControlName="type" />
+          </div>
+  
+          <div class="mb-3" *ngIf="form.get('image')?.value === null">
+            <img
+              [src]="'http://localhost:9090/api/articles/' + currentImage"
+              alt="Current Image"
+              width="120"
+              style="object-fit: cover; border-radius: 6px;"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Change Image (optional)</label>
+            <input
+              type="file"
+              class="form-control"
+              accept=".png,.jpg,.jpeg"
+              (change)="onFileChange($event)"
+            />
+          </div>
+          
+  
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+            <i class="fas fa-save me-1"></i> Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,107 @@
+<div class="container mt-4">
+  <h2 class="text-center">📚 Etudes Management</h2>
+
+  <!-- Form for Adding or Updating an Etude -->
+  <div class="card mt-3 p-4">
+    <h5>{{ selectedEtude.id ? 'Update' : 'Add' }} Etude</h5>
+    <form #etudeForm="ngForm" (ngSubmit)="saveEtude()" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedEtude.title" name="title" required />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedEtude.description" name="description" required />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Study Date</label>
+        <input type="date" class="form-control" [(ngModel)]="selectedEtude.studyDate" name="studyDate" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Documents</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" />
+      </div>
+      
+      <div class="col-md-6">
+        <label class="form-label">Type Etude</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedEtude.typeEtude" name="typeEtude" required />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Topographie</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedEtude.topographie" name="topographie" required />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date de Réalisation</label>
+        <input type="date" class="form-control" [(ngModel)]="selectedEtude.dateDeRealisation" name="dateDeRealisation" required />
+      </div>
+
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="etudeForm.invalid">
+          {{ selectedEtude.id ? 'Update' : 'Add' }} Etude
+        </button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="resetEtude()">Reset</button>
+      </div>
+    </form>
+  </div>
+<!-- Weather Section -->
+<div class="card mt-3 p-4">
+  <h5>🌤️ Check Weather</h5>
+  <form #weatherForm="ngForm" (ngSubmit)="getWeather()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Enter City</label>
+      <input type="text" class="form-control" [(ngModel)]="city" name="city" required placeholder="e.g., London" />
+    </div>
+    <div class="col-md-6 d-flex align-items-end">
+      <button type="submit" class="btn btn-info" [disabled]="weatherForm.invalid">Get Weather</button>
+    </div>
+  </form>
+  <div class="mt-3" *ngIf="weatherData">
+    <h6>Weather in {{ weatherData.city }}</h6>
+    <p>Temperature: {{ weatherData.temperature }}°C</p>
+    <p>Description: {{ weatherData.description }}</p>
+  </div>
+  <div class="mt-3 text-danger" *ngIf="weatherError">{{ weatherError }}</div>
+</div>
+  <!-- Etudes List -->
+  <table class="table table-striped table-hover mt-4">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Study Date</th>
+        <th>Documents</th>
+        <th>Type</th>
+        <th>Topographie</th>
+        <th>Date de Réalisation</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let etude of etudes">
+        <td>{{ etude.id }}</td>
+        <td>{{ etude.title || 'title' }}</td>
+        <td>{{ etude.description || 'N/A' }}</td>
+        <td>{{ etude.studyDate ? (etude.studyDate | date:'yyyy-MM-dd') : 'N/A' }}</td>
+        <td>{{ etude.documents && etude.documents.trim() !== '' ? etude.documents : 'N/A' }}</td>
+        <td>{{ etude.typeEtude || 'N/A' }}</td>
+        <td>{{ etude.topographie || 'N/A' }}</td>
+        <td>{{ etude.dateDeRealisation ? (etude.dateDeRealisation | date:'yyyy-MM-dd') : 'N/A' }}</td>
+        <td>
+          <button *ngIf="etude.documents" class="btn btn-success btn-sm" (click)="downloadFile(etude.documents)">
+            Download File
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editEtude(etude)">Edit</button>
+          <button class="btn btn-danger btn-sm ms-2" *ngIf="etude.id" (click)="deleteEtude(etude.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

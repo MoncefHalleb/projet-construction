@@ -1,0 +1,27 @@
+/* all-files.component.css */
+
+/* Ajouter de l'espace vide au-dessus du tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 60px;  
+  }
+  
+   th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  

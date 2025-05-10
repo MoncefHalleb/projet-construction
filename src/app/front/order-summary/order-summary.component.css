@@ -1,0 +1,14 @@
+.table th,
+.table td {
+  font-size: 30PX; /* Larger font */
+}
+
+.card {
+  background-color: #f9f9f9;
+  border: none;
+}
+
+.btn-success {
+  font-size: 35PX;
+  border-radius: 8px;
+}

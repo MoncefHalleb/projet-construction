@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css?family=Barlow:200,300,400,500,600,700,800,900|Teko:300,400,500,600,700&display=swap");
+
+/* Color Classes */
+.white-bg { background: #fff; }
+.gray-bg { background: #f7f7fd; }
+.black-bg { background: #16161a; }
+.theme-bg { background: #ff5f13; }
+.brand-bg { background: #f1f4fa; }
+.testimonial-bg { background: #f9fafc; }
+
+/* Text Colors */
+.white-color { color: #fff; }
+.black-color { color: #16161a; }
+.theme-color { color: #ff5f13; }
+
+/* Typography */
+body {
+    font-family: "Barlow", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Barlow", sans-serif;
+    color: #0b1c39;
+    font-weight: 500;
+}
+
+p {
+    font-family: "Barlow", sans-serif;
+    color: #333;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+/* Buttons */
+.boxed-btn {
+    background: #fff;
+    color: #ff5f13 !important;
+    display: inline-block;
+    padding: 18px 44px;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid #ff5f13;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.boxed-btn:hover {
+    background: #ff5f13;
+    color: #fff !important;
+}
+
+/* General Layout */
+img {
+    max-width: 100%;
+    transition: all 0.3s ease-out;
+}
+
+.f-left { float: left; }
+.f-right { float: right; }
+.clear { clear: both; }
+
+/* Link and Button Transitions */
+a, .button {
+    transition: all 0.3s ease-out;
+}
+
+a:hover {
+    color: #ff5f13;
+    text-decoration: none;
+}
+
+/* Overlay Effects */
+[data-overlay] {
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[data-overlay]::before {
+    content: "";
+    position: absolute;
+    left: 0; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll to Top Button */
+#scrollUp {
+    background: #ff5f13;
+    height: 50px;
+    width: 50px;
+    right: 31px;
+    bottom: 40px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 48px;
+    border: 2px solid transparent;
+}
+
+#scrollUp:hover {
+    color: #fff;
+    background: #e25311;
+}
+
+/* Sticky Header */
+.sticky-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 0 60px 0 rgba(0,0,0,0.07);
+    z-index: 9999;
+    background: #fff;
+    animation: fadeInDown 300ms ease-in-out;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartbeat {
+    to {
+        transform: scale(1.03);
+    }
+}
+
+.heartbeat {
+    animation: heartbeat 1s infinite alternate;
+}

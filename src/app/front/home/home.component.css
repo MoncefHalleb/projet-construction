@@ -1,0 +1,142 @@
+
+/* General Reset & Fonts */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+margin-top: 0;
+}
+
+/* Slider Area */
+.slider-area {
+    position: relative;
+}
+.services-area1 section-padding30 {
+    padding: 100px 0;
+    background: #3952b2;
+}
+.services-area1 section-padding30 container  {
+    padding: 100px 0;
+    background: #3952b2;
+}
+.hero__caption h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text2 a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff6f00;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-text2 a:hover {
+    background: #ff8f00;
+    transform: scale(1.05);
+}
+
+/* Services Section */
+.single-service-cap {
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background: #232020;
+}
+
+.single-service-cap:hover {
+    transform: translateY(-5px);
+}
+
+/* About Section */
+.support-company-area {
+    background: linear-gradient(to right, #f7f8fc, #ffffff);
+}
+
+/* Projects Section */
+.single-project {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img img {
+    transition: transform 0.4s ease;
+}
+
+.single-project:hover .project-img img {
+    transform: scale(1.1);
+}
+
+.plus-btn {
+    background: rgba(255, 111, 0, 0.85);
+    border-radius: 50%;
+    padding: 10px;
+    color: white;
+}
+
+/* Contact Section */
+.contact-with-area {
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.contact-with-area .white-btn {
+    background: white;
+    color: #ff6f00;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 10px 20px;
+}
+
+/* Counters */
+.single-counter .counter {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff6f00;
+}
+
+/* Team Section */
+.single-team .team-img img {
+    border-radius: 50%;
+    border: 4px solid #fff;
+    transition: transform 0.3s ease;
+}
+
+.single-team:hover .team-img img {
+    transform: scale(1.05);
+}
+
+/* Testimonial */
+.single-testimonial {
+    background: #030303;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial-top-cap p {
+    font-style: italic;
+}
+
+/* Blog Section */
+.single-news .d-btn {
+    color: #ff6f00;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Chatbot */
+app-chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

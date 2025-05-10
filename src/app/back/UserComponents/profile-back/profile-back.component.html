@@ -1,0 +1,18 @@
+<div class="profile-container">
+    <div class="profile-card">
+      <h2>Welcome, <span class="highlight">{{ username }}</span>!</h2>
+      <p><strong>Email:</strong> {{ email }}</p>
+      <p><strong>Email:</strong> {{ image_url }}</p>
+
+  
+      <div class="role-section">
+        <p><strong>Role:</strong> 
+          <span class="admin-role" *ngIf="role === 'admin'">Admin</span>
+          <span class="user-role" *ngIf="role !== 'admin'">{{ role }}</span>
+        </p>
+      </div>
+  
+      <p class="greeting">Enjoy your experience!</p>
+    </div>
+  </div>
+  

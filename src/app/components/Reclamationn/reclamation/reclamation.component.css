@@ -1,0 +1,84 @@
+.enhanced-reclamation-form {
+  background-color: #1e1e2f;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  max-width: full-width;
+  margin: auto;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+.form-layout-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-field-block label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  color: #e0e0e0;
+}
+
+.form-field-block input[type="text"],
+.form-field-block textarea,
+.form-field-block select,
+.form-field-block input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2b2b3d;
+  border: 1px solid #444;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-field-block input:focus,
+.form-field-block textarea:focus,
+.form-field-block select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-confirm {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

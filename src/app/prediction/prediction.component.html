@@ -1,0 +1,47 @@
+<div>
+    <h2>Customer Behavior Prediction</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="gender">Gender</label>
+      <select [(ngModel)]="gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+  
+      <label for="age">Age</label>
+      <input [(ngModel)]="age" name="age" type="number" required>
+  
+      <label for="membership">Membership</label>
+      <select [(ngModel)]="membership" name="membership" required>
+        <option value="Bronze">Bronze</option>
+        <option value="Silver">Silver</option>
+        <option value="Gold">Gold</option>
+      </select>
+  
+      <label for="averageRating">Average Rating</label>
+      <input [(ngModel)]="averageRating" name="averageRating" type="number" step="0.1" required>
+  
+      <label for="discountApplied">Discount Applied</label>
+      <select [(ngModel)]="discountApplied" name="discountApplied" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+  
+      <button type="submit">Submit</button>
+    </form>
+  
+    <div *ngIf="predictedLabel">
+      <h3>Prediction: {{ predictedLabel }}</h3>
+      <h4>Probabilities:</h4>
+      <ul>
+        <li>Unsatisfied: {{ probabilities['Unsatisfied'] }}</li>
+        <li>Neutral: {{ probabilities['Neutral'] }}</li>
+        <li>Satisfied: {{ probabilities['Satisfied'] }}</li>
+      </ul>
+      <div *ngIf="plotUrl">
+        <img [src]="'http://127.0.0.1:5001/' + plotUrl" alt="Prediction Plot" style="width: 400px;">
+      </div>
+      
+      
+    </div>
+  </div>
+  

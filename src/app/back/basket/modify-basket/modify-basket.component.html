@@ -1,0 +1,36 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Create Basket</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-plus-circle me-1"></i> Add New Basket
+        </div>
+        <div class="card-body">
+
+            <div *ngIf="isLoading" class="text-center my-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <form *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+
+
+                <!-- 📦 Assign Articles -->
+                <div class="mb-3">
+                    <label class="form-label">Assign Articles (optional)</label>
+                    <select class="form-select" multiple formControlName="selectedArticles">
+                        <option *ngFor="let article of allArticles" [value]="article.articleId">
+                            {{ article.name }} - {{ article.price }} TND
+                        </option>
+                    </select>
+                </div>
+
+                <!-- ✅ Submit -->
+                <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+                    <i class="fas fa-check-circle me-1"></i> Create Basket
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

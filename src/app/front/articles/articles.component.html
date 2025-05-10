@@ -1,0 +1,50 @@
+<br />
+<br />
+<br />
+<br />
+<div class="container mt-5">
+    <h2 class="mb-4">Nos Articles</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let article of articles">
+        <app-article-card
+          [article]="article"
+          [quantity]="quantities[article.articleId!]"
+          (acheterClicked)="onAcheter(article, $event)"
+          (louerClicked)="onLouer(article, $event)"
+        ></app-article-card>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 🛒 Floating Cart Icon -->
+  <div class="floating-cart" *ngIf="totalItems > 0" (click)="toggleCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="badge">{{ totalItems }}</span>
+  </div>
+  
+  <!-- 🧺 Cart Summary -->
+  <div class="cart-preview" *ngIf="showCart">
+    <h5 class="mb-3">Your Basket</h5>
+    <ul class="list-group mb-3">
+      <li class="list-group-item" *ngFor="let item of basketItems">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>
+            {{ item.quantity }}x {{ item.article.name }} - 
+            {{ item.article.price * item.quantity | currency }} 
+            <small class="text-muted">({{ item.type.toLowerCase() }})</small>
+          </span>
+          <button
+            class="btn btn-sm btn-outline-danger ms-2 py-0 px-2"
+            (click)="removeItem(item.article.articleId!, item.type)"
+          >
+            &times;
+          </button>
+        </div>
+      </li>
+    </ul>
+  
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-sm btn-success" (click)="goToOrderSummary()">Complete Order</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,116 @@
+<div class="layout-wrapper">
+
+    <!-- Header -->
+    <header>
+      <div class="header-area header-transparent">
+        <div class="main-header">
+          <div class="header-bottom header-sticky">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                
+                <!-- Logo -->
+                <div class="col-xl-2 col-lg-2 col-md-1">
+                  <div class="logo">
+                    <a href="/" class="big-logo">
+                        <img src="../../../assets/frontt/img/logo/LOGOO.png" alt="">
+
+                    </a>
+                    <a href="/" class="small-logo">
+                      <img src="../../../assets/frontt/img/logo/loder-logo.png" alt="">
+                    </a>
+                  </div>
+                </div>
+  
+                <!-- Menu -->
+                <div class="col-xl-8 col-lg-8 col-md-8">
+                  <div class="main-menu f-right d-none d-lg-block">
+                    <nav>
+                      <ul id="navigation">
+                        <li><a routerLink="/">Home</a></li>
+                        <li><a routerLink="/user/articles">Articles</a></li>
+                        <li><a routerLink="/user/orders">Panier</a></li>
+                        <li><a routerLink="/user/projects">Projets</a></li>
+                        <li><a routerLink="/user/weather">Weather</a></li>
+                        <li><a routerLink="/user/etudes">Etude</a></li>
+                        <li><a routerLink="/user/reclamationListUser">Mes Reclamations</a></li>
+                        <li><a routerLink="/user/addreclamation">Reclamer?</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+  
+            <!-- Profile Dropdown with Picture -->
+<div class="col-xl-2 col-lg-2 col-md-3">
+    <div class="header-right-btn f-right d-none d-lg-block position-relative">
+      <div class="dropdown">
+        <img [src]="profilePicUrl"
+             alt="Profile Picture"
+             class="dropdown-toggle profile-avatar"
+             id="profileDropdown"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+             (error)="profilePicUrl='assets/default-avatar.png'" />
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+          <li><a class="dropdown-item" routerLink="/user/profile">Profile</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/user/updateprofile', email]">Update Profile</a></li>
+          <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+                <div class="col-12">
+                  <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Routed Content -->
+    <main class="router-content">
+      <router-outlet></router-outlet>
+    </main>
+  
+    <!-- Footer -->
+    <footer>
+      <div class="footer-main">
+        <div class="footer ">
+          <div class="container-fluid">
+            <div class="row justify-content-between">
+              <div class="col-lg-4 col-md-4 col-sm-8">
+                <div class="single-footer-caption mb-30"></div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-8">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-form">
+                    <div id="mc_embed_signup"></div>
+                  </div>
+                  <div class="map-footer">
+                    <img src="../../../assets/frontt/img/gallery/map-footer.png" alt="Map">
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row align-items-center">
+              <div class="col-xl-12">
+                <div class="footer-copy-right">
+                  <p>
+                    &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                    Made with Love by
+                    <a href="http://localhost:4200/user" target="_blank">Mramma</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  

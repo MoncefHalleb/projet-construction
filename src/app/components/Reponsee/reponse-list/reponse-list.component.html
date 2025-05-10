@@ -1,0 +1,24 @@
+<h1 class="centre">Liste des Réponses</h1>
+<form [formGroup]="reponseListForm">
+  <div  class="entries-section-container">
+    <table class="table-auto" >
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reponse of reponses">
+        <td>{{ reponse.id_Reponse }}</td>
+        <td>{{ reponse.message_reponse }}</td>
+        <td>
+          <button (click)="deleteReponse(reponse.id_Reponse)" class="Button_Delete"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</form>

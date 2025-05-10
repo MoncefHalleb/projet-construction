@@ -1,0 +1,54 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Create Order</h1>
+  
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-plus-circle me-1"></i>
+        Add New Order
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  
+          <!-- 🔢 Order Number -->
+          <div class="mb-3">
+            <label for="number" class="form-label">Order Number</label>
+            <input id="number" type="number" class="form-control" formControlName="number" />
+            <div *ngIf="form.get('number')?.invalid && form.get('number')?.touched" class="text-danger small">
+              Order number is required and must be positive
+            </div>
+          </div>
+  
+          <!-- 💵 Total Price -->
+          <div class="mb-3">
+            <label for="totalPrice" class="form-label">Total Price</label>
+            <input id="totalPrice" type="number" class="form-control" formControlName="totalPrice" />
+            <div *ngIf="form.get('totalPrice')?.invalid && form.get('totalPrice')?.touched" class="text-danger small">
+              Total price must be 0 or higher
+            </div>
+          </div>
+  
+          <!-- 📦 Status -->
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" class="form-select" formControlName="status">
+              <option value="">Select status</option>
+              <option value="PENDING">Pending</option>
+              <option value="PROCESSING">Processing</option>
+              <option value="SHIPPED">Shipped</option>
+              <option value="DELIVERED">Delivered</option>
+            </select>
+            <div *ngIf="form.get('status')?.invalid && form.get('status')?.touched" class="text-danger small">
+              Status is required
+            </div>
+          </div>
+  
+          <!-- ✅ Submit -->
+          <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+            <i class="fas fa-check-circle me-1"></i> Submit
+          </button>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  
